@@ -4,7 +4,7 @@
 -- Conte quantos clientes da tabela sales.customers tem menos de 30 anos
 -- 4095 de 25109 clientes tem menos de 30 anos
 SELECT 
-	COUNT(EXTRACT(YEAR FROM AGE(birth_date)))
+	COUNT(*)
 FROM sales.customers
 WHERE EXTRACT(YEAR FROM AGE(birth_date)) < 30
 
@@ -20,7 +20,8 @@ FROM sales.customers
 -- (Exercício 3) 
 -- Selecione todas as informações do cliente mais rico da tabela sales.customers
 -- (possívelmente a resposta contém mais de um cliente)
-SELECT * FROM sales.customers
+SELECT * 
+FROM sales.customers
 WHERE income = (
 	SELECT MAX(income) FROM sales.customers
 )
@@ -39,9 +40,9 @@ ORDER BY brand
 -- Conte quantos veículos existem registrados na tabela sales.products
 -- por marca e ano do modelo. Ordene pela nome da marca e pelo ano do veículo
 -- 333 
-SELECT brand, model_year, model, COUNT(*) 
+SELECT brand, model_year, COUNT(*) 
 FROM sales.products
-GROUP BY brand, model_year, model
+GROUP BY brand, model_year
 ORDER BY brand, model_year
 
 
