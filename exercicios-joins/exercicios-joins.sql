@@ -12,11 +12,12 @@ LEFT JOIN sales.funnel AS fun
 GROUP BY cus.professional_status
 ORDER BY pagamentos DESC
 
-
 -- (Exemplo 2) Identifique qual é o gênero mais frequente nos clientes que compraram
 -- automóveis no site. Obs: Utilizar a tabela temp_tables.ibge_genders
 -- O primeiro nome vai identificar o gênero. 
-SELECT ibge.gender, COUNT(fun.paid_date) 
+SELECT 
+	ibge.gender, 
+	COUNT(fun.paid_date) 
 FROM sales.funnel AS fun 
 LEFT JOIN sales.customers AS cus
 	ON cus.customer_id = fun.customer_id
@@ -31,12 +32,15 @@ select * from temp_tables.regions limit 10
 
 -- sales.customers state e city
 -- temp_tables.regions city, state, region 
--- sales.funnel as VISITAS = customer_id o cliente
-SELECT reg.region , COUNT(fun.customer_id) AS clientes
+-- sales.funnel as VISITAS = visit_id
+SELECT 
+	reg.region , 
+	COUNT(fun.visit_id) AS visitas
 FROM sales.funnel AS fun
 LEFT JOIN sales.customers AS cus
 	ON fun.customer_id = cus.customer_id
 LEFT JOIN temp_tables.regions AS reg 
-	ON LOWER(cus.city) = LOWER(reg.city) AND LOWER(cus.state) = LOWER(reg.state)
+	ON LOWER(cus.city) = LOWER(reg.city) 
+	AND LOWER(cus.state) = LOWER(reg.state)
 GROUP BY reg.region
-ORDER BY clientes DESC
+ORDER BY visitas DESC
