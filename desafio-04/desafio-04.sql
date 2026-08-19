@@ -45,7 +45,3 @@ LEFT JOIN temp_tables.regions AS reg
 	AND LOWER(cus.state) = LOWER(reg.state)
 GROUP BY tamanho_cidade
 ORDER BY clientes DESC
-
-
-
-
